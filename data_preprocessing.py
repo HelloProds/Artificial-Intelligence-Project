@@ -4,6 +4,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 
 
+
 # Step 1: Simulate network traffic data
 def generate_synthetic_data(num_samples=1000):
     np.random.seed(42)
