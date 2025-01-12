@@ -57,7 +57,7 @@ pip install cryptography pandas scikit-learn
 ## 🚀 Usage
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/data-obfuscation-cybersecurity.git
+   git clone https://github.com/yourusername/Artificial-Intelligence-Project.git
    cd data-obfuscation-cybersecurity
    ```
 
