@@ -133,8 +133,11 @@ def integrated_workflow(input_file, aes_key, rsa_public_key, rsa_private_key, mo
     # Step 4: AI Analysis on Encrypted Data
     # Simulate feature extraction and prediction
     features = pd.DataFrame({
-        "feature1": [0.1],
-        "feature2": [100]
+        "Packet_Size": [50],
+        "Duration": [120],
+        "Src_Port": [8080],
+        "Dst_Port": [80],
+        "Protocol": [6]
     })
     prediction = model.predict(features)
     print(f"AI Prediction: {'Anomaly Detected' if prediction[0] == -1 else 'Normal'}")
