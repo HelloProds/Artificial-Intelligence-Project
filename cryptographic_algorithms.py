@@ -9,6 +9,8 @@ import base64
 from cryptography.fernet import Fernet
 import pandas as pd
 from sklearn.ensemble import IsolationForest
+import joblib
+
 
 # Save and load keys securely
 def save_key_to_file_securely(key, filename, password=None):
@@ -71,7 +73,7 @@ def detokenize(tokens, cipher):
     return [cipher.decrypt(token.encode()).decode() for token in tokens]
 
 # AI Anomaly Detection Model
-def train_ai_model():
+def train_ai_model(model_file="isolation_forest_model.pkl"):
     # Simulate training data (e.g., network traffic logs)
     normal_data = pd.DataFrame({
         "feature1": [0.1, 0.2, 0.1, 0.3],
@@ -87,7 +89,23 @@ def train_ai_model():
 
     model = IsolationForest(contamination=0.1, random_state=42)
     model.fit(data)
+
+  # Save the model
+    joblib.dump(model, model_file)
+    print(f"Model saved to '{model_file}'.")
+
     return model
+
+# Load AI Anomaly Detection Model
+def load_ai_model(model_file="isolation_forest_model.pkl"):
+    try:
+        model = joblib.load(model_file)
+        print(f"Model loaded from '{model_file}'.")
+        return model
+    except FileNotFoundError:
+        print(f"Model file '{model_file}' not found. Training a new model...")
+        return train_ai_model(model_file)
+
 
 # Integrated Workflow
 def integrated_workflow(input_file, aes_key, rsa_public_key, rsa_private_key, model):
@@ -148,7 +166,7 @@ if __name__ == "__main__":
         backend=default_backend()
     )
     rsa_public_key = rsa_private_key.public_key()
-    model = train_ai_model()
+    model = load_ai_model()
 
     # Save keys
     save_key_to_file_securely(aes_key, "aes_key.key")
