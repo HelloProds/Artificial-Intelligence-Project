@@ -4,7 +4,7 @@ from sklearn.metrics import classification_report, confusion_matrix
 import joblib
 
 # Load preprocessed data
-def load_data(data_dir="processed_data"):
+def load_data(data_dir="data"):
     X_train = pd.read_csv(f"{data_dir}/X_train.csv")
     X_test = pd.read_csv(f"{data_dir}/X_test.csv")
     y_train = pd.read_csv(f"{data_dir}/y_train.csv").iloc[:, 0]  # Convert to Series
