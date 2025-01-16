@@ -72,30 +72,6 @@ def tokenize(data):
 def detokenize(tokens, cipher):
     return [cipher.decrypt(token.encode()).decode() for token in tokens]
 
-# AI Anomaly Detection Model
-def train_ai_model(model_file="isolation_forest_model.pkl"):
-    # Simulate training data (e.g., network traffic logs)
-    normal_data = pd.DataFrame({
-        "feature1": [0.1, 0.2, 0.1, 0.3],
-        "feature2": [100, 150, 120, 130]
-    })
-    anomaly_data = pd.DataFrame({
-        "feature1": [5.0, 6.0],
-        "feature2": [500, 600]
-    })
-
-    data = pd.concat([normal_data, anomaly_data])
-    labels = [0] * len(normal_data) + [1] * len(anomaly_data)
-
-    model = IsolationForest(contamination=0.1, random_state=42)
-    model.fit(data)
-
-  # Save the model
-    joblib.dump(model, model_file)
-    print(f"Model saved to '{model_file}'.")
-
-    return model
-
 # Load AI Anomaly Detection Model
 def load_ai_model(model_file="isolation_forest_model.pkl"):
     try:
@@ -103,8 +79,7 @@ def load_ai_model(model_file="isolation_forest_model.pkl"):
         print(f"Model loaded from '{model_file}'.")
         return model
     except FileNotFoundError:
-        print(f"Model file '{model_file}' not found. Training a new model...")
-        return train_ai_model(model_file)
+        return (f"Model file '{model_file}' not found.")
 
 
 # Integrated Workflow
